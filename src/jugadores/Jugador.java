@@ -89,7 +89,7 @@ public class Jugador {
         this.partidasGanadas = partidasGanadas;
     }
     public String getInformacion() {
-        String resultado = " Nombre del jugador: " + nombre + "   Puntos: " + puntaje + "   Partidas ganadas: " + partidasGanadas;
+        String resultado = " Nombre del jugador: " + nombre + "   Partidas ganadas: " + partidasGanadas;
         return resultado;
     }
 

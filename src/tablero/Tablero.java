@@ -1,8 +1,9 @@
 
 package tablero;
 
+import java.util.Scanner;
 import jugadores.*;
-import practic3.IngresoDatos;
+//import practic3.IngresoDatos;
 
 
 public class Tablero {
@@ -12,6 +13,7 @@ public class Tablero {
     private Jugador jugador2;
 
     private boolean juegoEnBlancas;
+    Scanner scanner= new Scanner(System.in);
     //private VectorJugadores j = new VectorJugadores();
     
 
@@ -43,36 +45,46 @@ public class Tablero {
         if (tablero[x][y].getEsColor()==true);
         
     }
-    public void ingresarCoordenas(int cont) {
+    public void ingresarCoordenas() {
         //pintarTablero();
-        System.out.println("Ingrese la posicion Inicial ");
-        int x = IngresoDatos.getEntero("x: ", true);
-        int y = IngresoDatos.getEntero("y: ", true);
-        System.out.println("Ingrese la posicion final");
-        int x2 = IngresoDatos.getEntero("x: ", true);
-        int y2 = IngresoDatos.getEntero("y: ", true);
-        moverFicha(x, y, x2, y2,cont);
+        System.out.println("Ingrese la posicion inicial");
+        System.out.print("x: ");
+        int x= scanner.nextInt();
+        System.out.print("y: ");
+        int y= scanner.nextInt();
+        System.out.println("Ingrese la posicion a la que desea mover o la que desea comer: ");
+        System.out.print("x: ");
+        int x2= scanner.nextInt();
+        System.out.print("y: ");
+        int y2= scanner.nextInt();
+        moverFicha(x, y, x2, y2);
     }
     
     public void jugar(Jugador juga1,Jugador juga2){
         jugador1=juga1;
         jugador2=juga2;
-        String ganador;
+        String ganador = null;
         pintarTablero();
-        int cont1=0;
-        int cont2=0;
-         while(jugador1.getPuntaje()!=2 ||jugador2.getPuntaje()!=2){
-            System.out.println("Jugador 1: " + jugador1.getNombre()+"  Puntaje: "+jugador1.getPuntaje()+"  Color fichas amarillas");
-            System.out.println("Jugador 2: " + jugador2.getNombre()+"  Puntaje: "+jugador2.getPuntaje()+"  Color fichas rojas");
+         while((jugador1.getPuntaje()!=12) || (jugador2.getPuntaje()!=12)){
+            System.out.println("Jugador 1: " + jugador1.getNombre()+"  Puntaje: "+jugador1.getPuntaje()+"  Color fichas blancas");
+            System.out.println("Jugador 2: " + jugador2.getNombre()+"  Puntaje: "+jugador2.getPuntaje()+"  Color fichas Azules");
              System.out.println("Turno: "+jugador1.getNombre());
-            ingresarCoordenas(cont1);
+            ingresarCoordenas();
             pintarTablero();
             System.out.println("Jugador 1: " + jugador1.getNombre()+"  Puntaje: "+jugador1.getPuntaje());
             System.out.println("Jugador 2: " + jugador2.getNombre()+"  Puntaje: "+jugador2.getPuntaje());
             System.out.println("Turno: "+jugador2.getNombre());
-            ingresarCoordenas(cont2);
+            ingresarCoordenas();
             pintarTablero();
+             if (jugador1.getPuntaje()==2) {
+                 ganador=jugador1.getNombre();    
+             } else {
+                 if (jugador2.getPuntaje()==2) {
+                 ganador=jugador2.getNombre();
+             }
         }
+         
+    }
          if (jugador1.getPuntaje()>jugador2.getPuntaje()){
              ganador=jugador1.getNombre();
              jugador1.setPartidasGanadas(jugador1.getPartidasGanadas()+1);
@@ -85,7 +97,7 @@ public class Tablero {
         System.out.println("Felicidades ha ganado "+ganador);
     }
 
-    public boolean moverFicha(int posXIni, int posYIni, int posXFin, int posYFin, int cont) {
+    public boolean moverFicha(int posXIni, int posYIni, int posXFin, int posYFin) {
         boolean resultado = false;
         if (tablero[posXIni][posYIni].ocupadaPorFicha()) {
 
@@ -129,7 +141,6 @@ public class Tablero {
                                 tablero[posXFin + 1][posYFin - 1].setFicha(tablero[posXIni][posYIni].getFicha());
                                 System.out.println("comio");
                                 jugador2.setPuntaje(jugador2.getPuntaje()+1);
-                                cont+=1;
                                 resultado = true;
                             }
                         }
@@ -145,7 +156,6 @@ public class Tablero {
                                     tablero[posXFin - 1][posYFin - 1].setFicha(tablero[posXIni][posYIni].getFicha());
                                     System.out.println("comio");
                                     jugador2.setPuntaje(jugador2.getPuntaje()+1);
-                                    cont+=1;
                                     resultado = true;
                                 }
                             }
@@ -156,7 +166,7 @@ public class Tablero {
             }
 
         }
-        System.out.println("Casilla invalida");
+        //System.out.println("Casilla invalida");
         return resultado;
     }
 
@@ -177,7 +187,7 @@ public class Tablero {
     }
 
     public void pintarTablero(){
-        System.out.println("    0    1     2     3    4     5     6    7");
+        System.out.println("    0     1     2     3     4      5      6     7");
         for ( int i = 0; i < y; i++) {            
             //System.out.print(i);
             for (int k = 0; k <3; k++) {

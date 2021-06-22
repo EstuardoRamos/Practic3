@@ -1,4 +1,3 @@
-
 package tablero;
 
 
@@ -12,7 +11,6 @@ public class Ficha {
     public static final String ANSI_YELLOW = "\u001B[37m";
 
     private String id;
-
 
 
     

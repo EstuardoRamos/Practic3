@@ -23,18 +23,19 @@ public class Practic3 {
          */
     }
     public Practic3(){
+        //j.jugDefecto();
         int menu=0;
         while (menu >= 0) {
         System.out.println("\nJuegos Damas chinas\n");
         System.out.println("1- Jugar.");
         System.out.println("2- Ingresar jugadores");
         System.out.println("3- Estadisticaas jugadores. ");
+        System.out.println("4- Jugadores ordenados por punteo. ");
         System.out.println("-1- Salir.");
-        menu=IngresoDatos.getEntero("Ingrese la opcion que desea seleccionar:", true);
+        menu=scanner.nextInt();
         switch(menu){
             case 1:
-                t.pintarTablero();
-                
+                j.seleccionarJugador();
                 
                 break;
             case 2:
@@ -44,9 +45,11 @@ public class Practic3 {
                 j.mostrarInfo();
                 break;
             case 4:
-                j.seleccionarJugador();
-                
+                j.mostrarInfo();
+                j.ordenBurbuja();
+                j.mostrarInfo();
                 break;
+                
         }
         
         }
